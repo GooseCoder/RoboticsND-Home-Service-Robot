@@ -43,6 +43,6 @@ Finally you can send the robot to retrieve a marker and return to a drop off zon
 
 ```
 $ cd src/scripts
-$ ./test_navigation.sh
+$ ./home_service.sh
 ```
 
