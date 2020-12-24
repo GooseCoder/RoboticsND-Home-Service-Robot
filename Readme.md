@@ -1,7 +1,12 @@
 # Udacity Robotics Nanodegree
 ## Home Service Robot
 
-Home Service Robot project for the Robotics Nanodegree Program.
+Home Service Robot project for the Robotics Nanodegree Program. The following packages are used on the application:
+
+* gmapping to support the SLAM based map generation.
+* turtlebot this is the robot that navigates the simulated world.
+* turtlebot_simulator launches the gazebo simulation of the turtlebot
+* turtlebot_interactions library that allows user side interaction with turtlebot 
 
 ## Setup
 
