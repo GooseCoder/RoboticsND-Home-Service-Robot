@@ -1,0 +1,16 @@
+[submodule "src/pgm_map_creator"]
+	path = src/pgm_map_creator
+	url = https://github.com/udacity/pgm_map_creator.git
+[submodule "src/slam_gmapping"]
+	path = src/slam_gmapping
+	url = https://github.com/ros-perception/slam_gmapping.git
+[submodule "src/turtlebot"]
+	path = src/turtlebot
+	url = https://github.com/turtlebot/turtlebot.git
+[submodule "src/turtlebot_simulator"]
+	path = src/turtlebot_simulator
+	url = https://github.com/turtlebot/turtlebot_simulator.git
+[submodule "src/turtlebot_interactions"]
+	path = src/turtlebot_interactions
+	url = https://github.com/turtlebot/turtlebot_interactions.git
+
