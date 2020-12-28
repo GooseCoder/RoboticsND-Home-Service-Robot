@@ -12,27 +12,10 @@ bool itemDroppedOff = false;
 
 std::string status = "iddle";
 // 
-void odomSensorCallback(const nav_msgs::Odometry::ConstPtr& msg) {
-  double robotX = msg->pose.pose.position.x;
-  double robotY = msg->pose.pose.position.y;
-  
-  double distanceToPickup = sqrt(pow(robotX - pickUpPos[0], 2) + pow(robotY - pickUpPos[1], 2));
-  double distanceToDropOff = sqrt(pow(robotX - dropOffPos[0], 2) + pow(robotY - dropOffPos[1], 2));  
-
-  if (distanceToPickup < 0.5) {
-    status = "in-transit";
-  }
-
-  if (distanceToDropOff < 0.7) {
-    status = "arrived";
-  }
-}
-
 int main( int argc, char** argv )
 {
-  ros::init(argc, argv, "add_markers");
+  ros::init(argc, argv, "add_markers_timer");
   ros::NodeHandle n;
-  ros::Subscriber odom_sub = n.subscribe("odom", 100, odomSensorCallback);
   ros::Publisher marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 1);
 
   visualization_msgs::Marker marker;
@@ -89,13 +72,17 @@ int main( int argc, char** argv )
     
     if (status == "iddle")
     {
+      marker.pose.position.x = pickUpPos[0];
+      marker.pose.position.y = pickUpPos[1];
       marker.action = visualization_msgs::Marker::ADD;
       marker_pub.publish(marker);
+      status = "in-transit";
     }
     else if (status == "in-transit")
     {
       marker.action = visualization_msgs::Marker::DELETE;
       marker_pub.publish(marker);
+      status = "arrived";
     }
     else
     {
@@ -103,8 +90,9 @@ int main( int argc, char** argv )
       marker.pose.position.y = dropOffPos[1];
       marker.action = visualization_msgs::Marker::ADD;
       marker_pub.publish(marker);
+      status = "iddle";
     }
-    
+    ros::Duration(5.0).sleep();
     ros::spinOnce();
   }
 }
